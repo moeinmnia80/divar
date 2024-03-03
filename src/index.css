@@ -123,6 +123,21 @@
     .category-list-part{
         @apply flex justify-between w-1/6 text-[#bbb] text-sm border-l-1 border-[#bbb] px-5
     }
+    /* dashboard > add post */
+    .dashboard-title{
+        @apply w-max text-xl font-bold border-b-4 border-primary pb-2
+    }
+    .dashboard-form-label{
+        @apply text-sm py-3
+    }
+    .dashboard-form-input{
+        @apply w-1/5 text-sm outline-none border-1 border-[#bbb] rounded-[.25rem] p-2 mb-4 duration-300
+        focus:border-primary focus:shadow-[inset_0_0_0_1px_#A626268E]
+    }
+    .dashboard-form-button{
+        @apply w-20 text-white bg-primary rounded-md px-1 py-2 mt-4 duration-300 hover:brightness-110
+        disabled:bg-[#eee] disabled:cursor-no-drop
+    }
 }
 *{
     box-sizing: border-box;

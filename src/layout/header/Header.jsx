@@ -8,10 +8,15 @@ import { ChatIcon } from "assets/icons/ChatIcon.jsx";
 import { SearchBar } from "components/ui/SearchBar.jsx";
 import { LocationModal } from "components/ui/LocationModal.jsx";
 import { e2p } from "utils/helpers.js";
+import { useQuery } from "@tanstack/react-query";
+import { getProfile } from "services/user.js";
+import { SettingsIcon } from "assets/icons/SettingsIcon.jsx";
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [cities, setCities] = useState(["تهران", "مشهد", "اصفهان"]);
   const [isSelectLocation, setIsSelectLocation] = useState(false);
+
+  const { data } = useQuery({ queryKey: ["profile"], queryFn: getProfile });
   return (
     <>
       <header className={`header`}>
@@ -68,6 +73,14 @@ export const Header = () => {
             />
           </div>
           <div className={`header-sections`}>
+            {data?.data.role === "ADMIN" && (
+              <Link to={`/admin`} className={`header-sections-img-container`}>
+                <SettingsIcon
+                  style={`w-5 h-5 text-[#707070] group-hover:text-secondary`}
+                />
+                <p className={`header-section-text mr-1`}>پنل ادمین</p>
+              </Link>
+            )}
             <Link to={`/dashboard`} className={`header-sections-img-container`}>
               <UserIcon
                 style={`w-5 h-5 text-[#707070] group-hover:text-secondary`}

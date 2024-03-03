@@ -1,15 +1,12 @@
 import axios from "axios";
-import { getCookie, setCookie } from "utils/cookie";
+import { getCookie, setCookie } from "utils/cookie.js";
 import { getNewToken } from "configs/token.js";
 
-const api = axios.create({
+const apiMP = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  headers: { "Content-Type": "multipart/form-data" },
 });
-
-api.interceptors.request.use(
+apiMP.interceptors.request.use(
   (request) => {
     const accessToken = getCookie("accessToken");
     if (accessToken) request.headers.Authorization = `bearer ${accessToken}`;
@@ -19,7 +16,7 @@ api.interceptors.request.use(
     return Promise.reject(error);
   },
 );
-api.interceptors.response.use(
+apiMP.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -30,8 +27,8 @@ api.interceptors.response.use(
       const response = await getNewToken();
       if (!response?.response) return;
       setCookie(response?.response.data);
-      return api(originalRequest);
+      return apiMP(originalRequest);
     }
   },
 );
-export default api;
+export default apiMP;

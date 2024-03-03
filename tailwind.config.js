@@ -24,6 +24,9 @@ export default {
       borderWidth: {
         1: "1px",
       },
+      borderRadius: {
+        extraSmall: ".25rem",
+      },
     },
   },
   plugins: [],
